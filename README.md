@@ -1,8 +1,15 @@
-# Exercise 2
+# Exercise 3
 
 ```javascript
 let count = 0;
-document.addEventListener('click', () => console.log(`Clicked ${++count} times`));
+let rate = 1000;
+let lastClick = Date.now() - rate;
+document.addEventListener('click', () => {
+  if (Date.now() - lastClick >= rate) {
+    console.log(`Clicked ${++count} times`);
+    lastClick = Date.now();
+  }
+});
 ```
 
 <details>
