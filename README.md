@@ -1,12 +1,13 @@
-# Exercise 3
+# Exercise 4
 
 ```javascript
 let count = 0;
-let rate = 2000;
+const rate = 1000;
 let lastClick = Date.now() - rate;
-document.addEventListener('click', () => {
+document.addEventListener('click', event => {
   if (Date.now() - lastClick >= rate) {
-    console.log(`Clicked ${++count} times`);
+    count += event.clientX;
+    console.log(count);
     lastClick = Date.now();
   }
 });
@@ -16,11 +17,15 @@ document.addEventListener('click', () => {
 <summary>Solution</summary>
 
 ```javascript
-fromEvent(document, "click")
+import { fromEvent } from 'rxjs';
+import { throttleTime, map, scan } from 'rxjs/operators';
+
+fromEvent(document, 'click')
   .pipe(
-    throttleTime(2000),
-    scan(count => count + 1, 0)
+    throttleTime(1000),
+    map(event => event.clientX),
+    scan((count, clientX) => count + clientX, 0)
   )
-  .subscribe(count => console.log(`Clicked ${count} times`));
+  .subscribe(count => console.log(count));
 ```
 </details>
