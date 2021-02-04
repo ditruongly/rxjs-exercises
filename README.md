@@ -1,3 +1,14 @@
-# exercises-from-dily-with-rxjs
+# Exercise 1
+Normally you register event listeners.
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/exercises-from-dily-with-rxjs)
+```javascript
+document.addEventListener('click', () => console.log('Clicked!'));
+```
+
+<details>
+```typescript
+import { fromEvent } from 'rxjs';
+
+fromEvent(document, 'click').subscribe(() => console.log('Clicked!'));
+```
+</details>

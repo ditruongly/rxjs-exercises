@@ -1,9 +1,3 @@
-import { of } from 'rxjs'; 
-import { map } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 
-
-const source = of('World').pipe(
-  map(x => `Hello ${x}!`)
-);
-
-source.subscribe(console.log);
+fromEvent(document, 'click').subscribe(() => console.log('Clicked!'));
