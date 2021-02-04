@@ -1,4 +1,5 @@
 # Exercise 1
+
 ```javascript
 document.addEventListener('click', () => console.log('Clicked!'));
 ```
