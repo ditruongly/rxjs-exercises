@@ -6,6 +6,8 @@ document.addEventListener('click', () => console.log('Clicked!'));
 ```
 
 <details>
+<summary>Solution</summary>
+
 ```javascript
 import { fromEvent } from 'rxjs';
 
