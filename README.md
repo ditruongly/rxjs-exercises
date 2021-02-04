@@ -1,3 +1,3 @@
-# rxjs-vl2g1c
+# exercises-from-dily-with-rxjs
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/rxjs-vl2g1c)
+[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/exercises-from-dily-with-rxjs)
