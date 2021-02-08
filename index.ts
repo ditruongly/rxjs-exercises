@@ -1,13 +1,16 @@
-import { Observable } from 'rxjs';
- 
-const foo = new Observable(subscriber => {
-  console.log('Hello');
-  subscriber.next(42);
+import { Observable } from "rxjs";
+
+const observable = new Observable(function subscribe(subscriber) {
+  // Keep track of the interval resource
+  const intervalId = setInterval(() => {
+    subscriber.next("hello world");
+  }, 1000);
+
+  // Provide a way of canceling and disposing the interval resource
+  return function unsubscribe() {
+    clearInterval(intervalId);
+  };
 });
- 
-foo.subscribe(x => {
-  console.log(x);
-});
-foo.subscribe(y => {
-  console.log(y);
-});
+
+const subscription = observable.subscribe(x => console.log(x));
+subscription.unsubscribe();
