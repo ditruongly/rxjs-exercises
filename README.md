@@ -1,4 +1,4 @@
-# Exercise 4
+# Exercise 6
 
 ```javascript
 function foo() {
