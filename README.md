@@ -1,31 +1,37 @@
 # Exercise 4
 
 ```javascript
-let count = 0;
-const rate = 1000;
-let lastClick = Date.now() - rate;
-document.addEventListener('click', event => {
-  if (Date.now() - lastClick >= rate) {
-    count += event.clientX;
-    console.log(count);
-    lastClick = Date.now();
-  }
+import { Observable } from 'rxjs';
+ 
+const observable = new Observable(subscriber => {
+  subscriber.next(1);
+  subscriber.next(2);
+  subscriber.next(3);
+  setTimeout(() => {
+    subscriber.next(4);
+    subscriber.complete();
+  }, 1000);
 });
+ 
+console.log('just before subscribe');
+observable.subscribe({
+  next(x) { console.log('got value ' + x); },
+  error(err) { console.error('something wrong occurred: ' + err); },
+  complete() { console.log('done'); }
+});
+console.log('just after subscribe');
 ```
 
 <details>
 <summary>Solution</summary>
 
 ```javascript
-import { fromEvent } from 'rxjs';
-import { throttleTime, map, scan } from 'rxjs/operators';
-
-fromEvent(document, 'click')
-  .pipe(
-    throttleTime(1000),
-    map(event => event.clientX),
-    scan((count, clientX) => count + clientX, 0)
-  )
-  .subscribe(count => console.log(count));
+just before subscribe
+got value 1
+got value 2
+got value 3
+just after subscribe
+got value 4
+done
 ```
 </details>
