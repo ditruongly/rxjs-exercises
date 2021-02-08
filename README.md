@@ -1,37 +1,33 @@
 # Exercise 4
 
 ```javascript
-import { Observable } from 'rxjs';
- 
-const observable = new Observable(subscriber => {
-  subscriber.next(1);
-  subscriber.next(2);
-  subscriber.next(3);
-  setTimeout(() => {
-    subscriber.next(4);
-    subscriber.complete();
-  }, 1000);
-});
- 
-console.log('just before subscribe');
-observable.subscribe({
-  next(x) { console.log('got value ' + x); },
-  error(err) { console.error('something wrong occurred: ' + err); },
-  complete() { console.log('done'); }
-});
-console.log('just after subscribe');
-```
+function foo() {
+  console.log('Hello');
+  return 42;
+}
 
+const x = foo.call(); // same as foo()
+console.log(x);
+const y = foo.call(); // same as foo()
+console.log(y);
+```
+Write the same behavior above, but with Observables
 <details>
 <summary>Solution</summary>
 
 ```javascript
-just before subscribe
-got value 1
-got value 2
-got value 3
-just after subscribe
-got value 4
-done
+import { Observable } from 'rxjs';
+ 
+const foo = new Observable(subscriber => {
+  console.log('Hello');
+  subscriber.next(42);
+});
+ 
+foo.subscribe(x => {
+  console.log(x);
+});
+foo.subscribe(y => {
+  console.log(y);
+});
 ```
 </details>
